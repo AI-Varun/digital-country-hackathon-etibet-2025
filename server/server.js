@@ -23,6 +23,8 @@ connectDB();
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/wallet', require('./routes/wallet'));
+app.use('/api/passport', require('./routes/passport'));
+app.use('/api/reputation', require('./routes/reputation'));
 
 // Error Handler
 app.use(errorMiddleware);

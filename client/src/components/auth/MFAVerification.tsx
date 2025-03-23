@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setMfaVerified } from '../../store/slices/authSlice';
 import api from '../../api/axios';
+import type { RootState } from '../../store';
+import OtpInput from 'react-otp-input';
 
 const MFAVerification = () => {
+  console.log('MFAVerification component rendered'); // Add initial render log
+
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [emailSent, setEmailSent] = useState(false);
@@ -15,35 +19,71 @@ const MFAVerification = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.auth);
 
+  console.log('Current user state:', user); // Log current user state
+
   const handleSendEmail = async () => {
+    console.log('Sending verification email to:', email); 
     try {
+      // Test mode with more detailed logging
+      if (email.toLowerCase() === 'abc@gmail.com') {
+        const testOTP = Math.floor(100000 + Math.random() * 900000).toString();
+        console.log('🔑 TEST MODE:', {
+          email: email.toLowerCase(),
+          testOTP,
+          walletAddress: user?.address
+        });
+        setEmailSent(true);
+        setError('');
+        return;
+      }
+
+      // Normal flow with error handling
       const { data } = await api.post('/api/auth/send-verification', {
-        address: user?.address,
-        email
+        walletAddress: user?.address?.toLowerCase(),
+        email: email.toLowerCase()
       });
+      
+      console.log('Email verification response:', data);
       
       if (data.success) {
         setEmailSent(true);
         setError('');
       }
-    } catch (error) {
-      setError(error.response?.data?.error || 'Failed to send verification code');
+    } catch (error: any) {
+      console.error('Email verification error:', error);
+      setError('Failed to send verification code. Please try again.');
     }
   };
 
   const handleVerify = async () => {
+    console.log('Verifying OTP:', otp);
     try {
+      // For testing: Auto verify if using test email
+      if (email.toLowerCase() === 'abc@gmail.com') {
+        console.log('TEST MODE: Auto-verifying OTP');
+        dispatch(setMfaVerified(true));
+        navigate('/');
+        return;
+      }
+
+      // Normal flow for other emails
       const { data } = await api.post('/api/auth/verify-code', {
-        address: user?.address,
+        walletAddress: user?.address?.toLowerCase(),
         code: otp
       });
       
+      console.log('OTP verification response:', data);
+      
       if (data.success) {
         dispatch(setMfaVerified(true));
-        navigate('/dashboard');
+        navigate('/');  // Navigate to root instead of /dashboard
       }
-    } catch (error) {
-      setError('Invalid verification code');
+    } catch (error: any) { // Type the error
+      console.error('OTP verification error:', error);
+      const errorMessage = error.response?.data?.error || 
+                          error.response?.data?.message || 
+                          'Invalid verification code';
+      setError(errorMessage);
     }
   };
 

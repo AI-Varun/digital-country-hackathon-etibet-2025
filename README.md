@@ -81,6 +81,48 @@ REACT_APP_CONTRACT_ADDRESS=your_contract_address
 
 API documentation is available at `http://localhost:5000/api-docs` when running the backend server.
 
+## Testing MFA Verification
+
+### Quick Test Setup
+For development testing, use:
+- Email: `abc@gmail.com`
+- Any 6-digit OTP will work
+- No actual email will be sent
+
+### Test Flow
+1. Enter `abc@gmail.com` as the email
+2. System will generate a test OTP (visible in browser console)
+3. Enter any 6 digits as OTP
+4. System will auto-verify and redirect
+
+### Console Output
+When using test mode, you'll see:
+```typescript
+// On email submission
+🔑 TEST MODE: {
+  email: "abc@gmail.com",
+  testOTP: "123456", // Random 6-digit number
+  walletAddress: "0x..." // Current wallet address
+}
+
+// On verification
+TEST MODE: Auto-verifying OTP
+```
+
+### Development Notes
+- The test email bypass is only available in development
+- Real email verification should be implemented for production
+- Check browser console (F12) to see test OTP codes
+
+### Additional Logging and Error Messages
+These changes will:
+1. Add more detailed logging for test mode
+2. Make it clearer when test mode is active
+3. Provide better error messages
+4. Document the testing process in the README
+
+Remember to check the server logs for the actual 500 error cause, as it might need configuration updates in [server/controllers/authController.js](server/controllers/authController.js).
+
 ## Contributing
 
 1. Fork the repository

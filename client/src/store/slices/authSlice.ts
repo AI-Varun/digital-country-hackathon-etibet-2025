@@ -1,6 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { AuthState, User } from '../../types/auth';
 
+interface User {
+  walletAddress?: string;
+  // Add other user properties as needed
+}
+
+interface AuthState {
+  user: User | null;
+  isAuthenticated: boolean;
+  mfaVerified: boolean;
+  loading: boolean;
+  error: string | null;
+}
+
 const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
@@ -13,9 +26,9 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<{ address: string } | null>) => {
+    setUser: (state, action: PayloadAction<User | null>) => {
       state.user = action.payload;
-      state.isAuthenticated = true;
+      state.isAuthenticated = !!action.payload;
       state.error = null;
     },
     setMfaVerified: (state, action: PayloadAction<boolean>) => {
