@@ -1,61 +1,98 @@
-# Digital Country Hackathon: Building a Digital Tibet
+# Identity Hashers
 
-The E-Tibet Hackathon is an innovative event designed to develop digital solutions that address the challenges faced by Tibetan refugees. With 80% of government services now deliverable digitally, this hackathon advocates for borderless digital nations. Co-sponsored by [Draper Nation](https://drapernation.com), [Nishith Desai Associates](https://www.nishithdesai.com), and [OG Club DAO](https://ogclubdao.com), it provides participants the opportunity to explore solutions across five key tracks.
+A digital identity management system for creating and verifying digital identities using blockchain technology.
 
-- **Date**: 22-23rd March 2025
-- **Location**: [Draper Startup House Bangalore](https://draperstartuphouse.com/bangalore), India 🇮🇳 ([Google Maps](https://maps.app.goo.gl/4DJxza88WFr9KY6s7))
+## About
 
-Official Website: [etibet.co](https://etibet.co)
+Identity Hashers is a full-stack application that provides secure digital identity solutions using blockchain technology. The project consists of a React frontend and a Node.js backend with MongoDB for storage.
 
-## Tracks
+## Tech Stack
 
-- **Citizenship:** Digital identities, proof-of-personhood, and reputation systems
-- **Governance:** Administrative functions and digital voting
-- **Benefits & Services:** Healthcare, education, employment, and pensions
-- **Finance:** Digital currencies, taxation, and sovereign wealth management
-- **Cultural Heritage Preservation:** AI-powered archives and digital storytelling platforms
+### Frontend
+- React.js
+- TypeScript
+- Tailwind CSS
+- Ethers.js
+- Web3.js
 
-## Prizes
+### Backend
+- Node.js
+- Express
+- MongoDB
+- JWT Authentication
+- Smart Contracts (Solidity)
 
-- **1st Place:** 3 free nights at Draper Startup House (DSH) Bangalore
-- **2nd Place:** 2 free nights at DSH Bangalore
-- **3rd Place:** 1 free night at DSH Bangalore
-- **Bonus:** All teams presenting on March 23 receive a 25% discount on DSH accommodations
+## Prerequisites
 
-## Teams & Mentorship
+- Node.js (v16 or higher)
+- MongoDB
+- MetaMask wallet
+- Git
 
-Teams can range from solo participants to groups of up to five. Requirements:
+## Project Setup
 
-- At least one team member must be physically present in Bangalore
-- Each team requires a designated member with GitHub repository access
-- Mentors will be available throughout the hackathon to provide guidance
+### Clone the Repository
 
-## Workshops & Sessions
+```bash
+git clone https://github.com/yourusername/identity-hashers.git
+cd identity-hashers
+```
 
-Participants will gain valuable insights from industry experts:
+### Backend Setup
 
-- [Vikram Bharati](https://www.linkedin.com/in/vikrambharati): "How to think about an idea for a startup"
-- [Haimantika Mitra](https://www.linkedin.com/in/haimantika-mitra): "Leveraging AI for enhanced efficiency and better output"
-- [Aditya Oberai](https://www.linkedin.com/in/adityaoberai1): "Benefits of active contribution to GitHub and developer forums"
+```bash
+cd backend
+npm install
+cp .env.example .env
+# Update .env with your MongoDB URI and JWT secret
+npm run dev
+```
 
-## Submission Guidelines
+The backend will run on `http://localhost:5000`
 
-Teams must submit their work to this GitHub repository by **9AM on March 23**.
+### Frontend Setup
 
-Code needs to be submitted through a Pull Request on this repo.
+```bash
+cd frontend
+npm install
+cp .env.example .env
+# Update .env with your backend API URL
+npm start
+```
 
-The PR should contain a folder with your team codename.
+The frontend will run on `http://localhost:3000`
 
-The folder needs to have a README on how to run and understand your project alongside the full code of your project.
+## Environment Variables
 
-## Deliverables & Judging
+### Backend (.env)
+```
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+PORT=5000
+```
 
-- Problem Statement
-- Solution Overview
-- Tech Stack
+### Frontend (.env)
+```
+REACT_APP_API_URL=http://localhost:5000
+REACT_APP_CONTRACT_ADDRESS=your_contract_address
+```
 
-Judging will occur in two rounds, with top teams advancing to the final presentation. Winning teams will showcase strong proof of concept through working code or viable prototypes.
+## API Documentation
+
+API documentation is available at `http://localhost:5000/api-docs` when running the backend server.
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-By participating in the E-Tibet hackathon, you agree to open-source your code submissions under the Creative Commons Attribution-ShareAlike 4.0 International license.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+Project Link: [https://github.com/yourusername/identity-hashers](https://github.com/yourusername/identity-hashers)
